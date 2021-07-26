@@ -12,7 +12,7 @@ const Thankyou = (props) => {
   const [longitude, setLongitude] = useState(lon);
   const [user_en, setUserEN] = useState(raw);
 
-  function Position() {
+  async function Position() {
     const timestamp = new Date();
 
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -24,26 +24,27 @@ const Thankyou = (props) => {
       }
     });
 
-    // const options = {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(data),
-    // };
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    };
 
-    // if (data) {
-    //   const response = await fetch(
-    //     "http://localhost:8626/api/v1/covid-tracing/add",
-    //     options
-    //   );
-    //   await response.json();
-    // }
+    if (data) {
+      const response = await fetch(
+        "https://covid-tracing-firebase-r9f7z.ondigitalocean.app/api/covid-tracing",
+        options
+      );
+
+      response.json();
+    }
   }
 
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log("This will run every 6 second!");
+      console.log("This will run every 10 minutes!");
       Position();
     }, 6000);
     return () => clearInterval(interval);
