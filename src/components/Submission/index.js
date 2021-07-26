@@ -41,7 +41,7 @@ export default function Submission() {
             onChange={(data) => setUserEN(data.target.value)}
             placeholder={"Enter User EN"}
           />
-          <Link to={passingParam}>
+          <Link to={passingParam} style={{ textDecoration: "none" }}>
             <input type="submit" value="submit" />
           </Link>
         </form>
